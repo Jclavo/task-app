@@ -1,17 +1,10 @@
 @extends('layouts.app')
+@extends('layouts.validation_message')
 
 @section('content')
 
 <div class="container">
-	@if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
+
 
 	<h2>Add New Task</h2>
 
@@ -21,6 +14,14 @@
 			<textarea name="description" class="form-control"></textarea>
 		</div>
 
+		<div class="form-group">
+			
+			<select class="form-control" name="level">
+    			 @foreach($levels as $level)
+    				<option value="{{$level->id}}">{{$level->description}}</option>
+    			@endforeach
+			</select>
+		</div>
 
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary">Add Task</button>

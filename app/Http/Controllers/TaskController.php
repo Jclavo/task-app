@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Auth;
-
 use App\Task;
+use App\Level;
 
 class TaskController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +17,10 @@ class TaskController extends Controller
     public function index()
     {
         //
-       $user = Auth::user();
-       return view('welcome',compact('user'));
+        $user = Auth::user();
+
+        
+        return view('tasks.index', compact('user'));
     }
 
     /**
@@ -30,27 +31,38 @@ class TaskController extends Controller
     public function create()
     {
         //
-        return view('tasks.create');
+        if ($this->validate_auth()) {
+            //$levels = Level::pluck('description', 'id')->toArray();
+            $levels = Level::all(['id', 'description']);
+            return view('tasks.create',compact('levels'));
+        }
+        else{
+            return redirect('/');
+        }
+
+        
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
         $request->validate([
-            'description'=>'required'
+            'description' => 'required',
+            'level'       => 'required'
         ]);
-        
-        //$fillable = array('make', 'model', 'produced_on');
-        
+
+        // $fillable = array('make', 'model', 'produced_on');
+
         $task = new task([
             'description' => $request->get('description'),
-            'user_id'     =>Auth::id()
+            'level'       => $request->get('level'),
+            'user_id'     => Auth::id()
         ]);
         
         $task->save();
@@ -60,7 +72,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -71,34 +83,85 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
         //
+        if ($this->validate_auth_id($task)) {
+            $levels = Level::all(['id', 'description']);
+            return view('tasks.edit', compact('task','levels'));
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
+        if ($this->validate_auth($id)) {
+            $request->validate([
+                'description' => 'required',
+                'level'       => 'required'
+            ]);
+            
+            $task = Task::find($id);
+            $task->description = $request->get('description');
+            $task->level       = $request->get('level');
+            $task->save();
+            
+            return redirect('/tasks')->with('success', 'task updated!');
+        }
+        else{
+            return redirect('/');
+        }
+            
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+
+        if ($this->validate_auth_id($task)) {
+            
+            $task->delete();
+            return redirect('/tasks')->with('success', 'task deleted!');
+        }
+        else{
+            return redirect('/');
+        }
     }
+
+    private function validate_auth()
+    {
+
+        if (Auth::check()) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    
+    private function validate_auth_id(Task $task)
+    {
+        
+         if (Auth::check() && Auth::user()->id == $task->user_id) {
+             return TRUE;
+         }
+         return FALSE;
+    }
+
 }

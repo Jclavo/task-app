@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-    return view('tasks.create');
+    return view('welcome');
+    //return view('tasks.create');
 });
 
 Auth::routes();
@@ -21,3 +21,4 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('tasks', 'TaskController');
+Route::resource('levels', 'LevelController');
