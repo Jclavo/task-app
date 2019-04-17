@@ -16,7 +16,7 @@
 
 		<div class="form-group">
 			
-			<select class="form-control" name="level">
+			<select class="form-control" name="level_id">
     			 @foreach($levels as $level)
     				<option value="{{$level->id}}">{{$level->description}}</option>
     			@endforeach

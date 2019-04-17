@@ -19,7 +19,7 @@
 			@foreach($user->tasks as $task)
 			<tr>
 				<td>{{$task->description}}</td>
-				
+				<td>{{$task->level->description}}</td>
 				<td>
 					 <a href="{{ route('tasks.edit',$task->id)}}" class="btn btn-primary">Edit</a>
 				</td>	

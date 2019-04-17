@@ -54,14 +54,14 @@ class TaskController extends Controller
         //
         $request->validate([
             'description' => 'required',
-            'level'       => 'required'
+            'level_id'    => 'required'
         ]);
 
         // $fillable = array('make', 'model', 'produced_on');
 
         $task = new task([
             'description' => $request->get('description'),
-            'level'       => $request->get('level'),
+            'level_id'    => $request->get('level_id'),
             'user_id'     => Auth::id()
         ]);
         
@@ -111,12 +111,12 @@ class TaskController extends Controller
         if ($this->validate_auth($id)) {
             $request->validate([
                 'description' => 'required',
-                'level'       => 'required'
+                'level_id'    => 'required'
             ]);
             
             $task = Task::find($id);
             $task->description = $request->get('description');
-            $task->level       = $request->get('level');
+            $task->level_id    = $request->get('level_id');
             $task->save();
             
             return redirect('/tasks')->with('success', 'task updated!');

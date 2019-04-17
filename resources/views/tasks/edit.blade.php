@@ -15,9 +15,9 @@
 	
 	<div class="form-group">
 			
-			<select class="form-control" name="level">
+			<select class="form-control" name="level_id">
     			 @foreach($levels as $level)
-    			 	@if($level->id == $task->level )
+    			 	@if($level->id == $task->level_id )
     			 		<option value="{{$level->id}}" selected>{{$level->description}}</option>
     			 	@else
     			 		<option value="{{$level->id}}">{{$level->description}}</option>

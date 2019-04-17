@@ -52,5 +52,24 @@ class DatabaseSeeder extends Seeder
             ['description' => 'Low'] 
          */
         
+        /*
+         * DB::table('sucursales')->insert(
+        	array(
+        		array(
+        			'direccion'=>'Urb El Bosque',
+        			'id_ciudad'=>1,        			
+        			'created_at'=>Carbon::now(),
+        			'updated_at'=>Carbon::now()
+        		),
+        		array(
+        			'direccion'=>'Urb Los Cedros',
+        			'id_ciudad'=>1,       			
+        			'created_at'=>Carbon::now(),
+        			'updated_at'=>Carbon::now()
+        		)        		
+        	)
+        ); 
+         */
+        
     }
 }
