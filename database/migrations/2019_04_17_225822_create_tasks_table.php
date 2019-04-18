@@ -18,11 +18,12 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('description');
             
-            $table->integer('level_id')->unsigned();
+            $table->bigInteger('level_id')->unsigned()->index();
             $table->foreign('level_id')->references('id')->on('levels');
+            //$table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             
-            /*$table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users');*/
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

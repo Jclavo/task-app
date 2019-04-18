@@ -1,4 +1,5 @@
 @extends('layouts.app') 
+@extends('layouts.auth') 
 @extends('layouts.alert_message') 
 
 @section('content')

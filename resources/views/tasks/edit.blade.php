@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.auth') 
 @extends('layouts.validation_message')
 
 @section('content')
