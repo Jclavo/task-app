@@ -13,6 +13,8 @@
 			<tr>
 				<td >Task</td>
 				<td >Level</td>
+				<td >Start date</td>
+				<td >End date</td>
 				<td colspan = 2>Actions</td>
 			</tr>
 		</thead>
@@ -21,6 +23,8 @@
 			<tr>
 				<td>{{$task->description}}</td>
 				<td>{{$task->level->description}}</td>
+				<td>{{$task->start_date}}</td>
+				<td>{{$task->end_date}}</td>
 				<td>
 					 <a href="{{ route('tasks.edit',$task->id)}}" class="btn btn-primary">Edit</a>
 				</td>	

@@ -54,7 +54,9 @@ class TaskController extends Controller
         //
         $request->validate([
             'description' => 'required',
-            'level_id'    => 'required'
+            'level_id'    => 'required',
+            'start_date'  => 'required',
+            'end_date'    => 'required'
         ]);
 
         // $fillable = array('make', 'model', 'produced_on');
@@ -62,6 +64,8 @@ class TaskController extends Controller
         $task = new task([
             'description' => $request->get('description'),
             'level_id'    => $request->get('level_id'),
+            'start_date'  => $request->get('start_date'),
+            'end_date'    => $request->get('end_date'),
             'user_id'     => Auth::id()
         ]);
         
@@ -111,12 +115,16 @@ class TaskController extends Controller
         if ($this->validate_auth($id)) {
             $request->validate([
                 'description' => 'required',
-                'level_id'    => 'required'
+                'level_id'    => 'required',
+                'start_date'  => 'required',
+                'end_date'    => 'required'
             ]);
             
             $task = Task::find($id);
             $task->description = $request->get('description');
             $task->level_id    = $request->get('level_id');
+            $task->start_date  = $request->get('start_date');
+            $task->end_date    = $request->get('end_date');
             $task->save();
             
             return redirect('/tasks')->with('success', 'task updated!');

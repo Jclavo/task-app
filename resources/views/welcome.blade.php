@@ -23,5 +23,7 @@
 
 </h3>
 
+<p>Created by jclavotafur@gmail.com</p>
+
 @endif 
 @endsection
