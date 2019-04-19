@@ -20,5 +20,9 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('tasks/report', 'TaskController@report')->name('tasks.report');
 Route::resource('tasks', 'TaskController');
+
 Route::resource('levels', 'LevelController');
+
+//Route::post('/task','TasksController@create');

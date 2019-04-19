@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Task;
 use App\Level;
+use App\User;
 
 class TaskController extends Controller
 {
@@ -152,6 +153,18 @@ class TaskController extends Controller
         else{
             return redirect('/');
         }
+    }
+    
+    /*
+     * 
+     */
+    
+    public function report()
+    {
+        $tasks = Task::all();
+        $users = User::all();
+        return view('tasks.report', compact('tasks','users'));
+        //return view('tasks.report');
     }
 
     private function validate_auth()

@@ -4,15 +4,6 @@
 @if (Auth::check())
 
 <div class="container">
-
-
-	<a class="navbar-brand" href="{{ route('tasks.index')}}">
-        Task
-    </a>
-    <a class="navbar-brand" href="{{ route('levels.index')}}">
-        Levels
-    </a>
-
     
 </div>
 

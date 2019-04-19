@@ -9,15 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    @yield('other_styles')
 </head>
 <body>
     <div id="app">
@@ -29,6 +28,10 @@
                 <a class="navbar-brand" href="{{ route('tasks.index')}}">
                     Taks
                 </a>
+                <a class="navbar-brand" href="{{ route('tasks.report')}}">
+                    Report
+                </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -79,5 +82,10 @@
             @yield('content')
         </main>
     </div>
+    
+    <!-- Scripts -->
+   
+    @yield('other_scripts')
+    
 </body>
 </html>
